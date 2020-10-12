@@ -1,10 +1,15 @@
 const path = require('path')
 const fs = require('fs')
 
-if (process.argv.length != 3) {
-  console.log('Usage: node app.js ModuleName')
+if (process.argv.length != 4) {
+  console.log('Usage: node app.js ModuleName template-folder')
+  console.log('Included templates:')
+  console.log('    0.61+ - with support for RNW >=0.61')
+  console.log('    0.62+ - with support for RNW >=0.62')
+  process.exit(-1)
 }
 const modname = process.argv[2]
+const template = process.argv[3]
 const uuid = require('uuid').v4()
 console.log(`Generating ${modname} with GUID {${uuid}}`)
 
@@ -32,7 +37,8 @@ function templaize(source, destination) {
   }
 }
 
-if (!fs.existsSync('widnows')) {
-  fs.mkdirSync('widnows')
+if (!fs.existsSync('windows')) {
+  fs.mkdirSync('windows')
 }
-templaize(path.join(__dirname, 'template'), path.join('widnows', modname))
+templaize(path.join(__dirname, template), path.join('windows', modname))
+console.log('Be sure to update [module name here] in the README.md')
