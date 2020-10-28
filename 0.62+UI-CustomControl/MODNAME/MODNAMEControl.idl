@@ -1,0 +1,10 @@
+namespace MODNAME
+{
+    [default_interface]
+    runtimeclass MODNAMEControl : Windows.UI.Xaml.Controls.UserControl
+    {
+        MODNAMEControl(Microsoft.ReactNative.IReactContext context);
+        void UpdateProperties(Microsoft.ReactNative.IJSValueReader reader);
+        void DispatchCommand(String commandId, Microsoft.ReactNative.IJSValueReader commandArgsReader);
+    }
+}

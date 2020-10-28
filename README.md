@@ -12,6 +12,8 @@ node app.js ModuleName template
 * `template` is the template used to generate the project files. Currently:
   * `0.61+` for RNW 0.61 and later
   * `0.62+` for RNW 0.62 and later
+  * `0.62+UI` for RNW 0.62 and later, an UI module template that wraps a UWP control
+  * `0.62+UI-CustomControl` for RNW 0.62 and later, an UI module template that wraps a custom XAML control
 
 To generate a native module that will support RNW versions 0.61 and up:
 ```console
