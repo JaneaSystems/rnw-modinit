@@ -4,7 +4,7 @@
 #  include "ReactPackageProvider.g.cpp"
 #endif
 
-#include "MODNAME.h"
+#include "MODNAMEViewManager.h"
 
 using namespace winrt::Microsoft::ReactNative;
 

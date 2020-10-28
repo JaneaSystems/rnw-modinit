@@ -20,7 +20,7 @@ namespace winrt::MODNAME::implementation {
     }
 
     winrt::FrameworkElement MODNAMEViewManager::CreateView() noexcept {
-        return winrt::MODNAME::MODNAME();
+        return winrt::MODNAME::MODNAMEModule(m_reactContext);
     }
 
     // IViewManagerWithReactContext
@@ -34,36 +34,36 @@ namespace winrt::MODNAME::implementation {
 
     // IViewManagerWithNativeProperties
     IMapView<hstring, ViewManagerPropertyType> MODNAMEViewManager::NativeProps() noexcept {
-        return winrt::MODNAME::implementation::MODNAME::NativeProps();
+        return winrt::MODNAME::implementation::MODNAMEModule::NativeProps();
     }
 
     void MODNAMEViewManager::UpdateProperties(
         FrameworkElement const& view,
         IJSValueReader const& propertyMapReader) noexcept {
-         if (auto module = view.try_as<winrt::MODNAME::MODNAME>()) {
-            module->UpdateProperties(propertyMapReader);
+         if (auto module = view.try_as<winrt::MODNAME::MODNAMEModule>()) {
+            module.UpdateProperties(propertyMapReader);
         }
     }
     // IViewManagerWithExportedEventTypeConstants
-    ConstantProviderDelegate ReactWebViewManager::ExportedCustomBubblingEventTypeConstants() noexcept {
-        return winrt::MODNAME::implementation::MODNAME::ExportedCustomBubblingEventTypeConstants();
+    ConstantProviderDelegate MODNAMEViewManager::ExportedCustomBubblingEventTypeConstants() noexcept {
+        return winrt::MODNAME::implementation::MODNAMEModule::ExportedCustomBubblingEventTypeConstants();
     }
 
-    ConstantProviderDelegate ReactWebViewManager::ExportedCustomDirectEventTypeConstants() noexcept {
-       return winrt::MODNAME::implementation::MODNAME::ExportedCustomDirectEventTypeConstants();
+    ConstantProviderDelegate MODNAMEViewManager::ExportedCustomDirectEventTypeConstants() noexcept {
+       return winrt::MODNAME::implementation::MODNAMEModule::ExportedCustomDirectEventTypeConstants();
     }
 
     // IViewManagerWithCommands
-    IVectorView<hstring> ReactWebViewManager::Commands() noexcept {
-        return winrt::MODNAME::implementation::MODNAME::Commands();
+    IVectorView<hstring> MODNAMEViewManager::Commands() noexcept {
+        return winrt::MODNAME::implementation::MODNAMEModule::Commands();
     }
 
-    void ReactWebViewManager::DispatchCommand(
+    void MODNAMEViewManager::DispatchCommand(
         FrameworkElement const& view,
         winrt::hstring const& commandId,
         winrt::IJSValueReader const& commandArgsReader) noexcept {
-        if (auto module = view.try_as<winrt::MODNAME::MODNAME>()) {
-            module->DispatchCommand(commandId, commandArgsReader);
+        if (auto module = view.try_as<winrt::MODNAME::MODNAMEModule>()) {
+            module.DispatchCommand(commandId, commandArgsReader);
         }
     }
 }

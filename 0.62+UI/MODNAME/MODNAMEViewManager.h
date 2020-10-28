@@ -1,7 +1,7 @@
 #pragma once
 #include "winrt/Microsoft.ReactNative.h"
 #include "NativeModules.h"
-#include "MODNAME.h"
+
 
 namespace winrt::MODNAME::implementation {
     
@@ -10,7 +10,7 @@ namespace winrt::MODNAME::implementation {
         winrt::Microsoft::ReactNative::IViewManager,
         winrt::Microsoft::ReactNative::IViewManagerWithReactContext,
         winrt::Microsoft::ReactNative::IViewManagerWithNativeProperties,
-        winrt::Microsoft::ReactNative::IViewManagerWithExportedEventTypeConstants
+        winrt::Microsoft::ReactNative::IViewManagerWithExportedEventTypeConstants,
         winrt::Microsoft::ReactNative::IViewManagerWithCommands> {
     public:
         MODNAMEViewManager() = default;

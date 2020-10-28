@@ -3,13 +3,13 @@
 #include "pch.h"
 #include "winrt/Microsoft.ReactNative.h"
 #include "NativeModules.h"
-#include "MODNAME.g.h"
+#include "MODNAMEModule.g.h"
 
 namespace winrt::MODNAME::implementation {
 
-    class MODNAME : public MODNAMET<MODNAME> {
+    class MODNAMEModule : public MODNAMEModuleT<MODNAMEModule> {
     public:
-        MODNAME(Microsoft::ReactNative::IReactContext const& reactContext);
+        MODNAMEModule(Microsoft::ReactNative::IReactContext const& reactContext);
 
         static winrt::Windows::Foundation::Collections::
             IMapView<winrt::hstring, winrt::Microsoft::ReactNative::ViewManagerPropertyType>
@@ -35,5 +35,5 @@ namespace winrt::MODNAME::implementation {
 }
 
 namespace winrt::MODNAME::factory_implementation {
-    struct MODNAME : MODNAMET<MODNAME, implementation::MODNAME> {};
+    struct MODNAMEModule : MODNAMEModuleT<MODNAMEModule, implementation::MODNAMEModule> {};
 }

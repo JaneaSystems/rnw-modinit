@@ -1,7 +1,7 @@
 namespace MODNAME {
     [default_interface]
-    runtimeclass MODNAME : Windows.UI.Xaml.Controls.TextBox {
-        MODNAME(Microsoft.ReactNative.IReactContext context);
+    runtimeclass MODNAMEModule : Windows.UI.Xaml.Controls.TextBox {
+        MODNAMEModule(Microsoft.ReactNative.IReactContext context);
         void UpdateProperties(Microsoft.ReactNative.IJSValueReader reader);
         void DispatchCommand(String commandId, Microsoft.ReactNative.IJSValueReader commandArgsReader);
     };

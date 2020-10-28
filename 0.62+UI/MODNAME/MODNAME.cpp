@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "JSValueXaml.h"
 #include "MODNAME.h"
-#include "MODNAME.g.cpp"
+#include "MODNAMEModule.g.cpp"
 
 namespace winrt {
     using namespace Microsoft::ReactNative;
@@ -17,7 +17,7 @@ namespace winrt {
 
 namespace winrt::MODNAME::implementation {
 
-    MODNAME::MODNAME(winrt::IReactContext const& reactContext) : m_reactContext(reactContext) {
+    MODNAMEModule::MODNAMEModule(winrt::IReactContext const& reactContext) : m_reactContext(reactContext) {
         this->AllowFocusOnInteraction(true);
         // TODO: hook up events from the controll
         m_textChangedRevoker = this->TextChanged(winrt::auto_revoke,
@@ -28,31 +28,31 @@ namespace winrt::MODNAME::implementation {
         });
     }
 
-    void MODNAME::OnTextChanged(winrt::Windows::Foundation::IInspectable const& sender,
-                                winrt::Windows::UI::Xaml::Controls::TextChangedEventArgs const& args) {
+    void MODNAMEModule::OnTextChanged(winrt::Windows::Foundation::IInspectable const&,
+                                      winrt::Windows::UI::Xaml::Controls::TextChangedEventArgs const&) {
         // TODO: example sending event on text changed
         auto text = this->Text();
         m_reactContext.DispatchEvent(
-            *this,
-            L"sampleEvent",
-            [&](winrt::Microsoft::ReactNative::IJSValueWriter const& eventDataWriter) noexcept {
-                eventDataWriter.WriteObjectBegin();
-                WriteProperty(eventDataWriter, L"text", text);
-                eventDataWriter.WriteObjectEnd();
-            });
+          *this,
+          L"sampleEvent",
+          [&](winrt::Microsoft::ReactNative::IJSValueWriter const& eventDataWriter) noexcept {
+            eventDataWriter.WriteObjectBegin();
+            WriteProperty(eventDataWriter, L"text", text);
+            eventDataWriter.WriteObjectEnd();
+          }
         );
     }
 
     winrt::Windows::Foundation::Collections::
             IMapView<winrt::hstring, winrt::Microsoft::ReactNative::ViewManagerPropertyType>
-            MODNAME::NativeProps() noexcept {
+            MODNAMEModule::NativeProps() noexcept {
         // TODO: define props here
         auto nativeProps = winrt::single_threaded_map<hstring, ViewManagerPropertyType>();
         nativeProps.Insert(L"sampleProp", ViewManagerPropertyType::String);
         return nativeProps.GetView();
     }
 
-    void MODNAME::UpdateProperties(winrt::Microsoft::ReactNative::IJSValueReader const& propertyMapReader) noexcept {
+    void MODNAMEModule::UpdateProperties(winrt::Microsoft::ReactNative::IJSValueReader const& propertyMapReader) noexcept {
         // TODO: handle the props here
         const JSValueObject &propertyMap = JSValue::ReadObjectFrom(propertyMapReader);
         for (auto const &pair : propertyMap) {
@@ -61,37 +61,37 @@ namespace winrt::MODNAME::implementation {
             if (propertyName == "sampleProp") {
                 if (propertyValue != nullptr) {
                     auto const &value = propertyValue.AsString();
-                    ths->Text(value);
+                    this->Text(winrt::to_hstring(value));
                 } else {
-                    ths->Text(L"");
+                    this->Text(L"");
                 }
             }
         }
     }
 
-    winrt::Microsoft::ReactNative::ConstantProviderDelegate MODNAME::ExportedCustomBubblingEventTypeConstants() noexcept {
+    winrt::Microsoft::ReactNative::ConstantProviderDelegate MODNAMEModule::ExportedCustomBubblingEventTypeConstants() noexcept {
         return nullptr;
     }
     
-    winrt::Microsoft::ReactNative::ConstantProviderDelegate MODNAME::ExportedCustomDirectEventTypeConstants() noexcept {
+    winrt::Microsoft::ReactNative::ConstantProviderDelegate MODNAMEModule::ExportedCustomDirectEventTypeConstants() noexcept {
         return [](winrt::IJSValueWriter const& constantWriter) {
             // TODO: define events emitted by the control
             WriteCustomDirectEventTypeConstant(constantWriter, "sampleEvent");
         };
     }
 
-    winrt::Windows::Foundation::Collections::IVectorView<winrt::hstring> Commands() noexcept {
+    winrt::Windows::Foundation::Collections::IVectorView<winrt::hstring> MODNAMEModule::Commands() noexcept {
         // TODO: deifne commands supported by the control
         auto commands = winrt::single_threaded_vector<hstring>();
         commands.Append(L"sampleCommand");
         return commands.GetView();
     }
 
-    void MODNAME::DispatchCommand(winrt::hstring const &commandId, winrt::Microsoft::ReactNative::IJSValueReader const &commandArgsReader) noexcept {
+    void MODNAMEModule::DispatchCommand(winrt::hstring const &commandId, winrt::Microsoft::ReactNative::IJSValueReader const &commandArgsReader) noexcept {
         // TODO: handle commands here
         auto commandArgs = JSValue::ReadArrayFrom(commandArgsReader);
         if (commandId == L"sampleCommand") {
-            this->Text(L"sampleCommand used!);
+            this->Text(L"sampleCommand used!");
         }
     }
 }
